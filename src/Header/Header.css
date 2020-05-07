@@ -1,5 +1,11 @@
 .text {
   color: blueviolet;
-  size: 5px;
+  font-size: 35px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+@media only screen and (max-width: 700px) {
+  .text {
+    font-size: 20px;
+  }
 }

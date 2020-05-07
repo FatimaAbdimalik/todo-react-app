@@ -14,13 +14,13 @@
 } */
 
 .App-header {
-  background-color: #8c95a8;
+  background-color: #7298eb;
   /* min-height: 100vh; */
   display: flex;
   justify-content: space-evenly;
   /* align-items: center; */
   /* justify-content: center; */
-  font-size: calc(10px + 2vmin);
+  font-size: 40px;
   color: white;
 }
 
