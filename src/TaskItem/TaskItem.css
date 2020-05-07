@@ -1,0 +1,4 @@
+.task-item {
+  display: flex;
+  justify-content: space-evenly;
+}
