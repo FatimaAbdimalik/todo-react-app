@@ -7,8 +7,8 @@ function Header() {
       <div>
         <h2 className="text">Add a task here</h2>
       </div>
-      <div class="row">
-        <div class="col-12">
+      <div className="row">
+        <div className="col-12">
           <nav class="navbar navbar-light bg-light">
             <form class="form-inline">
               <input
