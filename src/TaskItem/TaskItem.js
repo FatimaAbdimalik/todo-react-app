@@ -15,12 +15,12 @@ function TaskItem() {
             <input type="text" name="task" value="task 1" id="task" />
           </div>
           <div className="col-12 col-sm-1">
-            <button type="button" class="btn btn-info">
+            <button type="button" className="btn btn-info">
               Done
             </button>
           </div>
           <div class="col-12 col-sm-1">
-            <button type="button" class="btn btn-danger">
+            <button type="button" className="btn btn-danger">
               Delete
             </button>
           </div>
@@ -37,12 +37,12 @@ function TaskItem() {
           <input type="text" name="task" value="task 2" id="task" />
         </div>
         <div className="col-12 col-sm-1">
-          <button type="button" class="btn btn-info">
+          <button type="button" className="btn btn-info">
             Done
           </button>
         </div>
         <div className="col-12 col-sm-1">
-          <button type="button" class="btn btn-danger">
+          <button type="button" className="btn btn-danger">
             Delete
           </button>
         </div>
@@ -55,12 +55,12 @@ function TaskItem() {
           <input type="text" name="task" value="task 3" id="task" />
         </div>
         <div className="col-12 col-sm-1">
-          <button type="button" class="btn btn-info">
+          <button type="button" className="btn btn-info">
             Done
           </button>
         </div>
         <div className="col-12 col-sm-1">
-          <button type="button" class="btn btn-danger">
+          <button type="button" className="btn btn-danger">
             Delete
           </button>
         </div>
@@ -73,12 +73,12 @@ function TaskItem() {
           <input type="text" name="task" value="task 4" id="task" />
         </div>
         <div className="col-12 col-sm-1">
-          <button type="button" class="btn btn-info">
+          <button type="button" className="btn btn-info">
             Done
           </button>
         </div>
         <div className="col-12 col-sm-1">
-          <button type="button" class="btn btn-danger">
+          <button type="button" className="btn btn-danger">
             Delete
           </button>
         </div>
@@ -91,12 +91,12 @@ function TaskItem() {
           <input type="text" name="task" value="task 5" id="task" />
         </div>
         <div className="col-12 col-sm-1">
-          <button type="button" class="btn btn-info">
+          <button type="button" className="btn btn-info">
             Done
           </button>
         </div>
         <div className="col-12 col-sm-1">
-          <button type="button" class="btn btn-danger">
+          <button type="button" className="btn btn-danger">
             Delete
           </button>
         </div>
@@ -117,7 +117,7 @@ function TaskItem() {
         </div>
         <div className="col-12 col-sm-1"></div>
         <div className="col-12 col-sm-1">
-          <button type="button" class="btn btn-danger">
+          <button type="button" className="btn btn-danger">
             Delete
           </button>
         </div>
