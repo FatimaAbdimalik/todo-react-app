@@ -2,3 +2,10 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+/* .row {
+  margin-bottom: 15px;
+} */
+.task--complete {
+  text-decoration: line-through;
+}
