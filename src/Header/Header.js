@@ -14,7 +14,7 @@ function Header(props) {
   }
   function handleAddTaskClick() {
     console.log("button clicked");
-    props.addTask(text.dueDate);
+    props.addTask(text, dueDate);
   }
   return (
     <div className="task-item">

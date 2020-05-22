@@ -11,54 +11,54 @@ function App() {
     {
       text: "Do shopping",
       Duedate: "2020/05/21",
-      compeleted: true,
+      completed: true,
       id: uuidv4(),
     },
     {
       text: "Do homework",
       Duedate: "2020/05/20",
-      compeleted: true,
+      completed: true,
       id: uuidv4(),
     },
     {
       text: "Start Eid prep",
       Duedate: "2020/05/19",
-      compeleted: false,
+      completed: false,
       id: uuidv4(),
     },
     {
       text: "Tidy up kitchen",
       Duedate: "2020/05/15",
-      compeleted: false,
+      completed: false,
       id: uuidv4(),
     },
     {
       text: "Cook Iftar",
       Duedate: "2020/05/14",
-      compeleted: true,
+      completed: true,
       id: uuidv4(),
     },
     {
       text: "Hoover the car",
       Duedate: "2020/05/18",
-      compeleted: true,
+      completed: true,
       id: uuidv4(),
     },
     {
       text: "Buy decorations",
       Duedate: "2020/05/12",
-      compeleted: true,
+      completed: true,
       id: uuidv4(),
     },
     {
       text: "Finish reading",
       Duedate: "2020/05/14",
-      compeleted: false,
+      completed: false,
       id: uuidv4(),
     },
   ]);
-  const activeTasks = tasks.filter((task) => !task.compeleted);
-  const compeletedTasks = tasks.filter((task) => task.compeleted);
+  const activeTasks = tasks.filter((task) => !task.completed);
+  const completedTasks = tasks.filter((task) => task.completed);
   function deleteTask(id) {
     // Look throught all the tasks, find where task.id === id
     // remove that task
@@ -89,7 +89,7 @@ function App() {
     const newTask = {
       text: text,
       Duedate: dueDate,
-      compeleted: false,
+      completed: false,
       id: uuidv4(),
     };
 
@@ -109,19 +109,19 @@ function App() {
             deleteTaskFunk={deleteTask}
             id={task.id}
             text={task.text}
-            compeleted={task.compeleted}
+            compelted={task.completed}
             Duedate={task.Duedate}
           />
         ))}
 
-        {compeletedTasks.map((task) => (
+        {completedTasks.map((task) => (
           <TaskItem
             key={task.id}
             completeTaskFunc={completeTask}
             deleteTaskFunk={deleteTask}
             id={task.id}
             text={task.text}
-            completed={task.compeleted}
+            completed={task.completed}
             Duedate={task.Duedate}
           />
         ))}
