@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import Header from "./Header/Header";
 import TaskItem from "./TaskItem/TaskItem";
 import Footer from "./Footer/Footer";
@@ -7,25 +8,106 @@ import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState([
-    { text: "Do shopping", Duedate: "2020/05/21", compeleted: true },
-    { text: "Do TR's homework", Duedate: "2020/05/20", compeleted: true },
-    { text: "Start Eid prep", Duedate: "2020/05/19", compeleted: false },
-    { text: "Tidy up living room", Duedate: "2020/05/15", compeleted: false },
-    { text: "Cook Iftar", Duedate: "2020/05/14", compeleted: true },
-    { text: "Hoover the car", Duedate: "2020/05/18", compeleted: true },
-    { text: "Buy decorations", Duedate: "2020/05/12", compeleted: true },
-    { text: "Finish reading", Duedate: "2020/05/14", compeleted: false },
+    {
+      text: "Do shopping",
+      Duedate: "2020/05/21",
+      compeleted: true,
+      id: uuidv4(),
+    },
+    {
+      text: "Do homework",
+      Duedate: "2020/05/20",
+      compeleted: true,
+      id: uuidv4(),
+    },
+    {
+      text: "Start Eid prep",
+      Duedate: "2020/05/19",
+      compeleted: false,
+      id: uuidv4(),
+    },
+    {
+      text: "Tidy up kitchen",
+      Duedate: "2020/05/15",
+      compeleted: false,
+      id: uuidv4(),
+    },
+    {
+      text: "Cook Iftar",
+      Duedate: "2020/05/14",
+      compeleted: true,
+      id: uuidv4(),
+    },
+    {
+      text: "Hoover the car",
+      Duedate: "2020/05/18",
+      compeleted: true,
+      id: uuidv4(),
+    },
+    {
+      text: "Buy decorations",
+      Duedate: "2020/05/12",
+      compeleted: true,
+      id: uuidv4(),
+    },
+    {
+      text: "Finish reading",
+      Duedate: "2020/05/14",
+      compeleted: false,
+      id: uuidv4(),
+    },
   ]);
   const activeTasks = tasks.filter((task) => !task.compeleted);
   const compeletedTasks = tasks.filter((task) => task.compeleted);
+  function deleteTask(id) {
+    // Look throught all the tasks, find where task.id === id
+    // remove that task
+    //update the task state
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+  }
+  function completeTask(id) {
+    //look through all the tasks
+    //if task.id === id, change completed: true
+    //update the task state
+    console.log(id);
+    const updatedCompleteTasks = tasks.map((task) => {
+      if (task.id === id) {
+        // change completed to be true TRANSFORM
+        task.completed = true;
+      }
+      return task;
+    });
+    console.log(updatedCompleteTasks);
+    setTasks(updatedCompleteTasks);
+  }
+  function addTask(text, dueDate) {
+    //get copy of exsisting tasks
+    // create a new task and merge to the array
+    // update the tasks state
+
+    const newTask = {
+      text: text,
+      Duedate: dueDate,
+      compeleted: false,
+      id: uuidv4(),
+    };
+
+    const updatedNewTasks = [...tasks, newTask];
+    setTasks(updatedNewTasks);
+  }
   return (
     <div className="App">
       <header className="App-header">To-Do List</header>
-      <Header />
+      <Header addTask={addTask} />
       <Task count={activeTasks.length} />
       <div>
         {activeTasks.map((task) => (
           <TaskItem
+            key={task.id}
+            completeTaskFunc={completeTask}
+            deleteTaskFunk={deleteTask}
+            id={task.id}
             text={task.text}
             compeleted={task.compeleted}
             Duedate={task.Duedate}
@@ -34,6 +116,10 @@ function App() {
 
         {compeletedTasks.map((task) => (
           <TaskItem
+            key={task.id}
+            completeTaskFunc={completeTask}
+            deleteTaskFunk={deleteTask}
+            id={task.id}
             text={task.text}
             completed={task.compeleted}
             Duedate={task.Duedate}

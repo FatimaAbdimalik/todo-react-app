@@ -1,3 +1,10 @@
+.row-justify-content-around {
+  display: flex;
+}
+
+/* .row-one {
+  margin-right: 20px;
+} */
 .text {
   color: blueviolet;
   font-size: 35px;

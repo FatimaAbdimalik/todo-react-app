@@ -9,7 +9,7 @@ function Task(props) {
           <div className="col-12"></div>
         </div>
       </div>
-      <div className="row">
+      <div className="row justify-content-center">
         <div className="col-12 col-sm-6">
           <h5 className="colour">You have {props.count} incomplete tasks!</h5>
         </div>
