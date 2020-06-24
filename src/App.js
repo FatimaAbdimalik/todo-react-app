@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useState, useEffect, Fragment } from "react";
+// import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 import Header from "./Header/Header";
 import TaskItem from "./TaskItem/TaskItem";
 import Footer from "./Footer/Footer";
@@ -7,72 +8,55 @@ import Task from "./Task/Task";
 import "./App.css";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      text: "Do shopping",
-      Duedate: "2020/05/21",
-      completed: true,
-      id: uuidv4(),
-    },
-    {
-      text: "Do homework",
-      Duedate: "2020/05/20",
-      completed: true,
-      id: uuidv4(),
-    },
-    {
-      text: "Start Eid prep",
-      Duedate: "2020/05/19",
-      completed: false,
-      id: uuidv4(),
-    },
-    {
-      text: "Tidy up kitchen",
-      Duedate: "2020/05/15",
-      completed: false,
-      id: uuidv4(),
-    },
-    {
-      text: "Cook Iftar",
-      Duedate: "2020/05/14",
-      completed: true,
-      id: uuidv4(),
-    },
-    {
-      text: "Hoover the car",
-      Duedate: "2020/05/18",
-      completed: true,
-      id: uuidv4(),
-    },
-    {
-      text: "Buy decorations",
-      Duedate: "2020/05/12",
-      completed: true,
-      id: uuidv4(),
-    },
-    {
-      text: "Finish reading",
-      Duedate: "2020/05/14",
-      completed: false,
-      id: uuidv4(),
-    },
-  ]);
-  const activeTasks = tasks.filter((task) => !task.completed);
-  const completedTasks = tasks.filter((task) => task.completed);
-  function deleteTask(id) {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://gq2n9pst7h.execute-api.eu-west-1.amazonaws.com/dev/tasks")
+      .then(
+        //request successful
+        (response) => {
+          console.log(response.data);
+          setTasks(response.data.MyTasks);
+        }
+      )
+      .catch(
+        // request gives an error
+        (error) => {
+          console.log("Error fetching data", error);
+        }
+      )
+      .finally(() => console.log("I am done"));
+  }, []);
+  const activeTasks = tasks && tasks.filter((task) => !task.completed);
+  const completedTasks = tasks && tasks.filter((task) => task.completed);
+
+  const deleteTask = (id) => {
     // Look throught all the tasks, find where task.id === id
     // remove that task
     //update the task state
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTasks);
-  }
+    // const updatedTasks = tasks.filter((task) => task.taskId !== id);
+    // setTasks(updatedTasks);
+    // use axios delete here
+    axios
+      .delete(
+        `https://gq2n9pst7h.execute-api.eu-west-1.amazonaws.com/dev/tasks/${id}`
+      )
+      .then((response) => {
+        const updatedTasks = tasks.filter((task) => task.taskId !== id);
+        setTasks(updatedTasks);
+      })
+      .catch((error) => {
+        console.log("Error deleting task", error);
+      });
+  };
   function completeTask(id) {
     //look through all the tasks
     //if task.id === id, change completed: true
     //update the task state
     console.log(id);
     const updatedCompleteTasks = tasks.map((task) => {
-      if (task.id === id) {
+      if (task.taskId === id) {
         // change completed to be true TRANSFORM
         task.completed = true;
       }
@@ -81,51 +65,68 @@ function App() {
     console.log(updatedCompleteTasks);
     setTasks(updatedCompleteTasks);
   }
-  function addTask(text, dueDate) {
+  function addTask(text, date) {
     //get copy of exsisting tasks
     // create a new task and merge to the array
     // update the tasks state
 
     const newTask = {
       text: text,
-      Duedate: dueDate,
-      completed: false,
-      id: uuidv4(),
+      date: date, // it was Duedate, but changed to date to match the backend
+      completed: false, // 0 false, 1 true
+      // taskId: uuidv4(), // in the database, it will autoincrement, no need
     };
 
-    const updatedNewTasks = [...tasks, newTask];
-    setTasks(updatedNewTasks);
+    axios
+      .post(
+        "https://gq2n9pst7h.execute-api.eu-west-1.amazonaws.com/dev/tasks",
+        newTask
+      )
+      .then(
+        //if the request is successful, get the task id and add it to the new task object
+        (response) => {
+          newTask.taskId = response.data.MyTasks.taskId;
+          const updatedNewTasks = [...tasks, newTask];
+          setTasks(updatedNewTasks);
+        }
+      )
+      .catch((error) => {
+        console.log("Error adding a task", error);
+      });
   }
+
   return (
     <div className="App">
       <header className="App-header">To-Do List</header>
       <Header addTask={addTask} />
-      <Task count={activeTasks.length} />
-      <div>
-        {activeTasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            completeTaskFunc={completeTask}
-            deleteTaskFunk={deleteTask}
-            id={task.id}
-            text={task.text}
-            compelted={task.completed}
-            Duedate={task.Duedate}
-          />
-        ))}
+      {tasks && (
+        <Fragment>
+          <Task count={activeTasks.length} />
+          {activeTasks.map((task) => (
+            <TaskItem
+              key={task.taskId}
+              completeTaskFunc={completeTask}
+              deleteTaskFunk={deleteTask}
+              id={task.taskId}
+              text={task.text}
+              compelted={task.completed}
+              date={task.date}
+            />
+          ))}
 
-        {completedTasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            completeTaskFunc={completeTask}
-            deleteTaskFunk={deleteTask}
-            id={task.id}
-            text={task.text}
-            completed={task.completed}
-            Duedate={task.Duedate}
-          />
-        ))}
-      </div>
+          {completedTasks.map((task) => (
+            <TaskItem
+              key={task.taskId}
+              completeTaskFunc={completeTask}
+              deleteTaskFunk={deleteTask}
+              id={task.taskId}
+              text={task.text}
+              completed={task.completed}
+              date={task.date}
+            />
+          ))}
+        </Fragment>
+      )}
       <Footer />
     </div>
   );

@@ -18,7 +18,7 @@ function TaskItem(props) {
         <div className="container-fluid">
           <div className="row justify-content-around">
             <div className="col-6 col-sm-3">{props.text}</div>
-            <div className="col-2 col-sm-3">{props.Duedate}</div>
+            <div className="col-2 col-sm-3">{props.date}</div>
             <div className="col-2 col-sm-1">
               {!props.completed && (
                 <button
