@@ -13,7 +13,7 @@ function TaskItem(props) {
     props.completeTaskFunc(props.id);
   }
   return (
-    <div>
+    <div className="position">
       <div className={`task task--${props.completed ? "complete" : "active"}`}>
         <div className="container-fluid">
           <div className="row justify-content-around">

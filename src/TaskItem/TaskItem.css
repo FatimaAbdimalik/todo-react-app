@@ -1,5 +1,5 @@
 .task-item {
-  display: flex;
+  /* display: flex; */
   justify-content: space-evenly;
 }
 
@@ -9,3 +9,11 @@
 .task--complete {
   text-decoration: line-through;
 }
+
+/* @media only screen and (max-width: 555px) {
+  .position {
+    display: flex;
+    flex-direction: column;
+    /* background-color: aqua; */
+/* } */
+/* } */
