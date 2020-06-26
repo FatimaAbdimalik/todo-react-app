@@ -55,7 +55,7 @@ function App() {
 
     axios
       .put(
-        `https://gq2n9pst7h.execute-api.eu-west-1.amazonaws.com/dev/tasks/${id}`,
+        ` https://gq2n9pst7h.execute-api.eu-west-1.amazonaws.com/dev/tasks/${id}`,
         {
           completed: true,
         }
