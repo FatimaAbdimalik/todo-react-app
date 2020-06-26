@@ -6,7 +6,7 @@ import TaskItem from "./TaskItem/TaskItem";
 import Footer from "./Footer/Footer";
 import Task from "./Task/Task";
 import "./App.css";
-
+// dateFormat();
 function App() {
   const [tasks, setTasks] = useState([]);
 
@@ -32,12 +32,6 @@ function App() {
   const completedTasks = tasks && tasks.filter((task) => task.completed);
 
   const deleteTask = (id) => {
-    // Look throught all the tasks, find where task.id === id
-    // remove that task
-    //update the task state
-    // const updatedTasks = tasks.filter((task) => task.taskId !== id);
-    // setTasks(updatedTasks);
-    // use axios delete here
     axios
       .delete(
         `https://gq2n9pst7h.execute-api.eu-west-1.amazonaws.com/dev/tasks/${id}`
@@ -54,22 +48,34 @@ function App() {
     //look through all the tasks
     //if task.id === id, change completed: true
     //update the task state
-    console.log(id);
-    const updatedCompleteTasks = tasks.map((task) => {
-      if (task.taskId === id) {
-        // change completed to be true TRANSFORM
-        task.completed = true;
-      }
-      return task;
-    });
-    console.log(updatedCompleteTasks);
-    setTasks(updatedCompleteTasks);
+    // console.log(id);
+
+    // console.log(updatedCompleteTasks);
+    // setTasks(updatedCompleteTasks);
+
+    axios
+      .put(
+        `https://gq2n9pst7h.execute-api.eu-west-1.amazonaws.com/dev/tasks/${id}`,
+        {
+          completed: true,
+        }
+      )
+      .then((response) => {
+        console.log("Task updated", response);
+        const updatedCompleteTasks = tasks.map((task) => {
+          if (task.taskId === id) {
+            // change completed to be true TRANSFORM
+            task.completed = 1;
+          }
+          return task;
+        });
+        setTasks(updatedCompleteTasks);
+      })
+      .catch((error) => {
+        console.log("Error updating Task", error);
+      });
   }
   function addTask(text, date) {
-    //get copy of exsisting tasks
-    // create a new task and merge to the array
-    // update the tasks state
-
     const newTask = {
       text: text,
       date: date, // it was Duedate, but changed to date to match the backend
@@ -94,7 +100,6 @@ function App() {
         console.log("Error adding a task", error);
       });
   }
-
   return (
     <div className="App">
       <header className="App-header">To-Do List</header>

@@ -1,5 +1,6 @@
 import React from "react";
 import "./TaskItem.css";
+import moment from "moment";
 
 function TaskItem(props) {
   // function handelDeleteClick() {
@@ -7,7 +8,7 @@ function TaskItem(props) {
   //   console.log(props.id);
   //   props.deleteTask(props.id);
   // }
-  function handelCompleteClick() {
+  function handleCompleteClick() {
     console.log("complete button has been clicked");
     console.log(props.id);
     props.completeTaskFunc(props.id);
@@ -18,13 +19,15 @@ function TaskItem(props) {
         <div className="container-fluid">
           <div className="row justify-content-around">
             <div className="col-6 col-sm-3">{props.text}</div>
-            <div className="col-2 col-sm-3">{props.date}</div>
+            <div className="col-2 col-sm-3">
+              {moment(props.date).format("MMM Do YY")}
+            </div>
             <div className="col-2 col-sm-1">
               {!props.completed && (
                 <button
                   type="button"
                   className="btn btn-info"
-                  onClick={handelCompleteClick}
+                  onClick={handleCompleteClick}
                 >
                   Done
                 </button>

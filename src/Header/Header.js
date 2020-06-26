@@ -3,7 +3,7 @@ import "./Header.css";
 
 function Header(props) {
   const [text, setText] = useState(" ");
-  const [dueDate, setDueDate] = useState("");
+  const [dueDate, setDueDate] = useState();
   function handleTextChange(event) {
     setText(event.target.value);
     // console.log(event.target.value);
