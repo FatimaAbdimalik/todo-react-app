@@ -6,7 +6,6 @@ import TaskItem from "./TaskItem/TaskItem";
 import Footer from "./Footer/Footer";
 import Task from "./Task/Task";
 import "./App.css";
-// dateFormat();
 function App() {
   const [tasks, setTasks] = useState([]);
 
